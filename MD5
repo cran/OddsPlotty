@@ -1,0 +1,12 @@
+fe788afa55b09e0e5dc8762da6e4536c *DESCRIPTION
+0ca359189b2f5e1929f80852cbfe6855 *NAMESPACE
+50e3eb9b779f45b2cba5193bec50c1d2 *NEWS.md
+8f25787a8184fec7c0c7ad09aac44df1 *R/OddsPlotR.R.R
+6fe5608ca525f004d31ea0cd1e2c78ec *build/vignette.rds
+c07ad96998e1a84ee2effcfd83688698 *inst/doc/introduction.R
+2342bd7b69055e3648852f494cb1bd2e *inst/doc/introduction.Rmd
+b5abe33ee4f224d2aaeb1dae554f498f *inst/doc/introduction.html
+e46a7806a695ce763a3887567999a34d *man/figures/OddsPlotty.png
+ddf076d334eecf7ca42d3267968bae6e *man/odds_plot.Rd
+3093e318e6e3d21790f6834aa4777b9b *vignettes/OddsPlotty.png
+2342bd7b69055e3648852f494cb1bd2e *vignettes/introduction.Rmd
