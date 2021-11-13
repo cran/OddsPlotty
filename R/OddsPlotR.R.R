@@ -4,6 +4,8 @@
 #'
 #'
 #' @param x The trained caret GLM logistic regression model
+#' @param x_label The label name for the x_label
+#' @param y_label The label name for the y_label
 #' @param title Title for the Odds Plot
 #' @param subtitle Subtitle for the Odds Plot
 #' @param point_col Defaults to blues, but R colour codes can be passed
@@ -50,8 +52,9 @@
 
 
 
-odds_plot <- function(x, title = NULL, subtitle = NULL, point_col='blue',
-                      error_bar_colour = "black", point_size = .3,
+odds_plot <- function(x, x_label = "Variables" , y_label = "Odds Ratio",
+                      title = NULL, subtitle = NULL, point_col='blue',
+                      error_bar_colour = "black", point_size = 5,
                       error_bar_width = .3, h_line_color = "black"){
 
   # Set the variables to null
@@ -71,14 +74,13 @@ odds_plot <- function(x, title = NULL, subtitle = NULL, point_col='blue',
   ticks <- c(seq(.1, 1, by =.1), seq(0, 10, by =1), seq(10, 100, by =10))
 
   plot <- ggplot(odds, aes(y= OR, x = reorder(vars, OR))) +
-    geom_point(aes(color=point_col,
-                   size = point_size), color = point_col) +
+    geom_point(aes(color=point_col), size = point_size, color = point_col) +
     geom_errorbar(aes(ymin=lower, ymax=upper),
                   width= error_bar_width, colour = error_bar_colour) +
     scale_y_log10(breaks=ticks, labels = ticks) +
     geom_hline(yintercept = 1, linetype=2, color = h_line_color) +
     coord_flip() +
-    labs(title = title, subtitle = subtitle, x = 'Variables', y = 'Odds Ratio') +
+    labs(title = title, subtitle = subtitle, x = x_label, y = y_label) +
     theme_bw() + theme(legend.position = "none")
 
 

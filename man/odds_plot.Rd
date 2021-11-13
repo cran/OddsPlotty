@@ -6,17 +6,23 @@
 \usage{
 odds_plot(
   x,
+  x_label = "Variables",
+  y_label = "Odds Ratio",
   title = NULL,
   subtitle = NULL,
   point_col = "blue",
   error_bar_colour = "black",
-  point_size = 0.3,
+  point_size = 5,
   error_bar_width = 0.3,
   h_line_color = "black"
 )
 }
 \arguments{
 \item{x}{The trained caret GLM logistic regression model}
+
+\item{x_label}{The label name for the x_label}
+
+\item{y_label}{The label name for the y_label}
 
 \item{title}{Title for the Odds Plot}
 

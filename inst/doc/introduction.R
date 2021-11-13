@@ -9,8 +9,6 @@ library(OddsPlotty)
 
 
 ## ----load_pack----------------------------------------------------------------
-#install.packages("mlbench")
-#install.packages("caret")
 library(mlbench)
 library(caret)
 library(tibble)
@@ -41,10 +39,12 @@ str(breast)
 
 ## ----train_glm----------------------------------------------------------------
 library(caret)
-glm_model <- train(Class ~ .,
+glm_model <- caret::train(Class ~ .,
                    data = breast,
                    method = "glm",
                    family = "binomial")
+
+summary(glm_model)
 
 
 ## ----odds_plot, echo = FALSE--------------------------------------------------
@@ -76,7 +76,7 @@ plot <- plot + ggthemes::theme_economist() + theme(legend.position = "NULL")
 # Add odds ratios to labels by calling the data list element
 # The round function is used to return 2 decimal place values
 plot + geom_text(label=round(plotty$odds_plot$data$OR, digits=2), 
-                             hjust=0.1, vjust=2)
+                             hjust=0.1, vjust=1, color="navy")
 
 
 ## ----themes-------------------------------------------------------------------
@@ -92,5 +92,33 @@ plotty <- OddsPlotty::odds_plot(glm_model$finalModel,
                       h_line_color = "red")
 
 plotty$odds_plot + ggthemes::theme_tufte()
+
+
+## ----train_glm_tidymodels-----------------------------------------------------
+library(tidymodels)
+fitted_logistic_model<- logistic_reg() %>%
+  # Set the engine
+  set_engine("glm") %>%
+  # Set the mode - this will always be classification for logstic regression 
+  set_mode("classification") %>%
+  # Fit the model
+  fit(Class ~ ., data = breast)
+
+
+## ----tm_oddsplot--------------------------------------------------------------
+# Create odds plot for TidyModels object
+tidy_odds_plot <- OddsPlotty::odds_plot(fitted_logistic_model$fit,
+                                        title="TidyModels Odds Plot",
+                                        point_col = "#6b95ff",
+                                        h_line_color = "red")
+
+# Output plot and data table
+tidy_odds_plot$odds_plot + ggthemes::theme_gdocs()+ #Use ggthemes
+                    theme(legend.position="none") #Turn off legend
+
+#Generate tibble returning exp(odds) and 
+
+tidy_odds_plot$odds_data
+
 
 
